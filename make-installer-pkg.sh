@@ -53,6 +53,6 @@ function pre_cleanup(){
 # MARK: main()
 echo "Enter a version number (for example YYYY.MM like 2016.07):"
 read PACKAGE_VERSION
-declare -x PACKAGE_PATH="$THIS_DIR/Munki_Conditions-$PACKAGE_VERSION.pkg"
+declare -x PACKAGE_PATH="$THIS_DIR/OOAJ_Munki_Conditions-$PACKAGE_VERSION.pkg"
 pre_cleanup
 build_package

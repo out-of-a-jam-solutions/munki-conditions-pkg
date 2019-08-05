@@ -80,6 +80,16 @@ def munki_installed():
         return False
 
 
+def gruntwork_munki_installed():
+    cmd = ["pkgutil", "--pkg-info", "com.mac-msp.gruntwork.munki3"]
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output = p.communicate()[0]
+    if p.returncode == 0:
+        return True
+    else:
+        return False
+
+
 def is_system_version_supported():
     system_version_plist = plistlib.readPlist("/System/Library/CoreServices/SystemVersion.plist")
     product_name = system_version_plist['ProductName']
@@ -295,7 +305,7 @@ def main(argv=None):
         elcapitan_supported_dict = {'elcapitan_supported': False}
 
     # Update "ConditionalItems.plist" if munki is installed
-    if munki_installed() and update_munki_conditional_items:
+    if (munki_installed() or gruntwork_munki_installed()) and update_munki_conditional_items:
         append_conditional_items(elcapitan_supported_dict)
 
     # Exit codes:

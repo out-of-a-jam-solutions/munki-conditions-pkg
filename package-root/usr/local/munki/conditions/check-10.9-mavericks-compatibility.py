@@ -75,6 +75,16 @@ def conditional_items_path():
         return "/Library/Managed Installs/ConditionalItems.plist"
 
 
+def gruntwork_munki_installed():
+    cmd = ["pkgutil", "--pkg-info", "com.mac-msp.gruntwork.munki3"]
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output = p.communicate()[0]
+    if p.returncode == 0:
+        return True
+    else:
+        return False
+
+
 def munki_installed():
     cmd = ["pkgutil", "--pkg-info", "com.googlecode.munki.core"]
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -350,7 +360,7 @@ def main(argv=None):
         mavericks_needs_fw_update_dict = {'mavericks_needs_fw_update': False}
 
     # Update "ConditionalItems.plist" if munki is installed
-    if munki_installed() and update_munki_conditional_items:
+    if (munki_installed() or gruntwork_munki_installed()) and update_munki_conditional_items:
         append_conditional_items(mavericks_supported_dict)
         append_conditional_items(mavericks_needs_fw_update_dict)
 

@@ -45,7 +45,7 @@ from Foundation import CFPreferencesCopyAppValue
 verbose = True
 # Set this to True if you want to add "mountainlion_supported" custom conditional to
 # /Library/Managed Installs/ConditionalItems.plist
-updateMunkiConditionalItems = False
+updateMunkiConditionalItems = True
 # ================================================================================
 # End configuration
 # ================================================================================

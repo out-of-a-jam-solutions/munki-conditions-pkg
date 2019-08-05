@@ -43,7 +43,7 @@ verbose = True
 
 # Set this to True if you want to add "yosemite_supported" custom conditional to
 # /Library/Managed Installs/ConditionalItems.plist
-update_munki_conditional_items = False
+update_munki_conditional_items = True
 
 # ================================================================================
 # End configuration

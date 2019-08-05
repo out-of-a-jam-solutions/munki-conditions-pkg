@@ -41,7 +41,7 @@ verbose = True
 
 # Set this to True if you want to add "sierra_supported" custom conditional to
 # /Library/Managed Installs/ConditionalItems.plist
-update_munki_conditional_items = False
+update_munki_conditional_items = True
 
 # ================================================================================
 # End configuration
@@ -57,7 +57,7 @@ def logger(message, status, info):
 def conditional_items_path():
     # <https://github.com/munki/munki/wiki/Conditional-Items>
     # Read the location of the ManagedInstallDir from ManagedInstall.plist
-    
+
     cmd = [
         "/usr/bin/defaults",
         "read",
@@ -67,7 +67,7 @@ def conditional_items_path():
     p = subprocess.Popen(cmd, bufsize=1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (results, err) = p.communicate()
     managed_installs_dir = results.strip()
-    
+
     # Make sure we're outputting our information to "ConditionalItems.plist"
     if managed_installs_dir:
         return os.path.join(managed_installs_dir, 'ConditionalItems.plist')

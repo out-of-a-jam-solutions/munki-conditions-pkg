@@ -49,7 +49,7 @@ from Foundation import CFPreferencesCopyAppValue
 verbose = True
 # Set this to True if you want to add "mavericks_supported" custom conditional to
 # /Library/Managed Installs/ConditionalItems.plist
-update_munki_conditional_items = False
+update_munki_conditional_items = True
 # ================================================================================
 # End configuration
 # ================================================================================
@@ -299,10 +299,10 @@ def is_firmware_compatible():
         return True
     if hardware_model() not in ['MacBookAir5,1', 'MacBookAir5,2']:
         return True
-    
+
     revisions = ['TPSABBF0', 'TPVABBF0']
     models = ['TS064E', 'TS128E']
-    
+
     model, revision = check_firmware_version()
     if any(mod in model for mod in models) and any(rev in revision for rev in revisions):
         logger("SSD Model",
